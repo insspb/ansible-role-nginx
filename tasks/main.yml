@@ -1,2 +1,8 @@
----
-# tasks file for nginx
+- include: package.yml
+  when: nginx_install_method == "package"
+
+- include: configure.yml
+
+- include: default_site.yml
+
+- include: sites.yml

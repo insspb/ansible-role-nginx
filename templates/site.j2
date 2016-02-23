@@ -1,0 +1,28 @@
+server {
+
+{% for key,value in item.server.iteritems() %}
+{% if key.find('location') == -1 %}
+    {% if value is not string and value is iterable %}
+    {% for listvalue in value %}
+        {{ key }} {{ listvalue }};
+    {% endfor %}
+    {% else %}
+        {{ key }} {{ value }};
+    {% endif %}
+    {% endif %}
+{% endfor %}
+
+{% for key,value in item.server.iteritems() if key.find('location') != -1 %}
+    location {{ value.name }} {
+    {% for secondkey,secondvalue in value.iteritems() if secondkey != 'name' %}
+    {% if secondvalue is not string and secondvalue is iterable %}
+    {% for listsecondvalue in secondvalue %}
+        {{ secondkey }} {{ listsecondvalue }};
+    {% endfor %}
+    {% else %}
+        {{ secondkey }} {{ secondvalue }};
+    {% endif %}
+    {% endfor %}
+  }
+{% endfor %}
+}
