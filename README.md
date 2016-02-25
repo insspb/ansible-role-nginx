@@ -16,13 +16,13 @@ Please refer to defaults/main.yml to see current supported configuration options
 ```yaml
 nginx_sites:
     - site:
-        name: "test.anovatio.fr"                                # Mandatory
+        name: "test.site.com"                                   # Mandatory 
         enabled: True                                           # If False will not be linked in sites-enabled folder
         do_not_create_dir: True                                 # When we use nginx as a proxy or load balancer we do not need to create directories in www folder.
         custom_config: True                                     # This is start point for our configuration. 
                                                                 # Full custom configs allow us to make anything we want with nginx 
                                                                 # outside ansible, but still check it as host state on ansible script run.
-        custom_config_path: files/test.anovatio.fr              # This is path to config file if custom_config is true.
+        custom_config_path: files/test.site.com                 # This is path to config file if custom_config is true.
 
 ```
 ## Dependencies
