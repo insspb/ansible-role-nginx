@@ -1,0 +1,22 @@
+- name: Setting right values for Red Hat systems
+  set_fact:
+    nginx_user: nginx
+    nginx_group: nginx
+
+- name: Nginx | Add the nginx repository
+  yumrepo:
+    name: nginx
+    baseurl: 'http://nginx.org/packages/{{ ansible_distribution | lower }}/{{ ansible_distribution_major_version }}/$basearch/'
+    enabled: yes
+    gpgcheck: no
+    state: present
+
+- name: Nginx | Make sure nginx is installed (package)
+  yum:
+    name: nginx
+    state: present
+    update_cache: yes
+  notify:
+    - restart nginx
+
+- include: directories.yml

@@ -3,8 +3,10 @@
 - name: restart nginx
   service: name=nginx state=restarted
   become: yes
+  become_method: su
   when: not nginx_first_start.changed
 
 - name: reload nginx
   service: name=nginx state=reloaded
   become: yes
+  become_method: su

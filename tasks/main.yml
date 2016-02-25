@@ -1,5 +1,11 @@
-- include: package.yml
-  when: nginx_install_method == "package"
+- include: pkg-CentOs.yml
+  when: ( "{{ nginx_install_method }}" == "package"
+        and "{{ ansible_os_family }}"  == "RedHat")
+
+- include: pkg-Debian.yml
+  when: ( "{{ nginx_install_method }}" == "package"
+        and "{{ ansible_distribution }}" == "Ubuntu"
+        or "{{ ansible_distribution }}" == "Debian")
 
 - include: configure.yml
 
