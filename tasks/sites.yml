@@ -5,6 +5,8 @@
   with_items: "{{ nginx_sites }}"
   when: nginx_sites is defined
         and "{{ item.site.custom_config }}" == "False"
+  notify:
+    - reload nginx
 
 - name: Nginx | Update the configurations for cusrom sites inventory
   copy:
@@ -15,6 +17,8 @@
         and "{{ item.site.custom_config }}" == "True"
         and "{{ item.site.custom_config_path }}" is defined
   ignore_errors: True
+  notify:
+    - reload nginx
 
 - name: Nginx | Create virtual sites directories
   file:
