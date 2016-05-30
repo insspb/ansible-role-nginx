@@ -8,10 +8,38 @@
   notify:
     - reload nginx
 
+- name: Nginx | Upload SSL certificate for custrom sites inventory
+  copy:
+    src: "{{ item.site.custom_ssl_path }}"
+    dest: "{{ nginx_dir }}/ssl/{{ item.site.name }}.crt"
+    backup: yes
+
+  with_items: "{{ nginx_sites }}"
+  when: nginx_sites is defined
+        and "{{ item.site.custom_ssl }}" == "True"
+        and "{{ item.site.custom_ssl_path }}" is defined
+  ignore_errors: True
+  notify:
+    - reload nginx
+
+- name: Nginx | Upload SSL private key for custrom sites inventory
+  copy:
+    src: "{{ item.site.custom_ssl_key_path }}"
+    dest: "{{ nginx_dir }}/ssl/{{ item.site.name }}.key"
+    backup: yes
+  with_items: "{{ nginx_sites }}"
+  when: nginx_sites is defined
+        and "{{ item.site.custom_ssl }}" == "True"
+        and "{{ item.site.custom_ssl_key_path }}" is defined
+  ignore_errors: True
+  notify:
+    - reload nginx
+
 - name: Nginx | Update the configurations for cusrom sites inventory
   copy:
     src: "{{ item.site.custom_config_path }}"
     dest: "{{ nginx_dir }}/sites-available/{{ item.site.name }}"
+    backup: yes
   with_items: "{{ nginx_sites }}"
   when: nginx_sites is defined
         and "{{ item.site.custom_config }}" == "True"
