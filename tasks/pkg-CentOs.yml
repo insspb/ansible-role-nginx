@@ -4,7 +4,7 @@
     nginx_group: nginx
 
 - name: Nginx | Add the nginx repository
-  yumrepo:
+  yum_repository:
     name: nginx
     baseurl: 'http://nginx.org/packages/{{ ansible_distribution | lower }}/{{ ansible_distribution_major_version }}/$basearch/'
     enabled: yes
