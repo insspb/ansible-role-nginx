@@ -102,6 +102,5 @@ http {
   limit_req_zone $binary_remote_addr zone={{nginx_rate_limiting_zone_name}}:{{nginx_rate_limiting_backoff}} rate={{nginx_rate_limit}};
 {% endif %}
 
-  include {{nginx_dir}}/conf.d/*.conf;
   include {{nginx_dir}}/sites-enabled/*;
 }
