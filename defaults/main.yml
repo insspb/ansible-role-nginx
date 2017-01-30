@@ -1,6 +1,7 @@
 # file: nginx/defaults/main.yml
 
 nginx_install_method: "package"
+nginx_service_enable: True
 nginx_source_version: "1.8.0"
 nginx: "nginx"
 
@@ -11,6 +12,10 @@ nginx_dir: "/etc/nginx"
 nginx_www_dir: "/srv/www"
 nginx_log_dir: "/var/log/nginx"
 nginx_pid: "/var/run/nginx.pid"
+
+nginx_enable_ports: True
+open_80: True
+open_443: False
 
 # nginx.conf
 # Remember:

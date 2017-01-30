@@ -1,0 +1,14 @@
+---
+- name: Nginx enable port 80 with firewalld
+  firewalld:
+    state: enabled
+    permanent: true
+    service: http
+  when: "{{ open_80 }}"
+
+- name: Nginx enable port 443 with firewalld
+  firewalld:
+    state: enabled
+    permanent: true
+    service: https
+  when: "{{ open_443 }}"

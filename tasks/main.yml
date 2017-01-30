@@ -12,3 +12,6 @@
 - include: default_site.yml
 
 - include: sites.yml
+
+- include: firewalld.yml
+  when: ("{{ nginx_enable_ports }}" and "{{ ansible_service_mgr }}" == "systemd")

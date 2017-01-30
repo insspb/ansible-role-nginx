@@ -20,4 +20,10 @@
   notify:
     - restart nginx
 
+- name: Nginx | Enable nginx service
+  service:
+    name: nginx
+    enabled: yes
+  when: "{{ nginx_service_enable }}"
+
 - include: directories.yml
